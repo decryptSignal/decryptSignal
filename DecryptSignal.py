@@ -57,7 +57,7 @@ def ios_auto():
     for file_name in os.listdir(os.path.dirname(os.path.realpath(__file__))):
         if file_name == encryptedDB:
             DB_found = True
-        if file_name.enswith("signal.json") or file_name.endswith("keychain.plist"):
+        if file_name.endswith("signal.json") or file_name.endswith("keychain.plist"):
             keychainDump = file_name
 
     if not DB_found:
