@@ -1,22 +1,21 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-import pandas as pd
-import sqlite3
+import datetime
+import json
+import math
+import ntpath
 import os
-import plistlib
+import pathlib
 import re
+import sqlite3
 import sys
+from distutils.dir_util import copy_tree
 from glob import glob
 from pathlib import Path
-import pathlib
-import math
-import json
-import numpy
-from pandas.core.indexes.base import Index
-import ntpath
-from distutils.dir_util import copy_tree
-import datetime
+import pandas as pd
+
+##  This code is also available, as source code or compiled binary, at https://github.com/decryptSignal/decryptSignal
 
 html = ""
 exe_path = os.path.dirname(os.path.realpath(__file__))
@@ -81,7 +80,7 @@ def iOS(db, attachmentPath):
     
     getOfferType_iOS(df)
     df = df.drop(columns=['offerType', 'infoMessageUserInfo'])
-    #if attachmentPath != "":
+
     getAttachments_iOS(df, attachmentPath)
 
     pd.set_option('display.max_colwidth', None)
@@ -341,11 +340,12 @@ def main(db, os_version1, attachmentPath):
         windows(db, attachmentPath)
 
     # write html to file
-    text_file = open(f"{outputDir}/report_{os_version}.html", "w")
+    text_file = open(f"{outputDir}/report_{os_version}.html", "w", encoding="utf-8")
     text_file.write(html)
     text_file.close()
     
     print(f"Report created, {outputDir}/report_{os_version}.html")
+    os.system("pause")
     
 if __name__ == '__main__':
     print(sys.argv[1:])
